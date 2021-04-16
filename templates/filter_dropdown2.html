@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<style>
+    body { 
+        background-image: url("/media/static/admin_static/garage.jpg");
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        height: 100%;
+        background-position: center;
+        color: white;
+    }
+    label {
+        padding:15px;
+    }
+    .jumbotron {
+        background-image: url("/media/static/admin_static/black.png");
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        color: white;
+    }
+    .container {
+        background-image: url("/media/static/admin_static/black.png");
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<div class="jumbotron">
+    <div class="container">
+    <h2>Select Your Vehicle Details</h2>
+    <p><i>Auto Parts Web Store.</i></p>
+    <center>
+    <div style="border: dashed 2px grey;">
+        <form id="myForm"
+            method="GET"
+            class="form-inline"
+            data-make="{{ request.GET.make }}"
+            data-model_type="{{ request.GET.model_type }}"
+            data-car_type="{{ request.GET.car_type }}"
+            data-category="{{ request.GET.category }}"
+            data-subcategory="{{ request.GET.subcategory }}"
+            >
+        <div class="form-group">
+            <label for="makeSelect">Make</label>
+            {% render_field form.make title="Makes" class="form-control" %}
+        </div>
+
+        <div class="form-group">
+            <label for="model_typeSelect"> Model</label>
+            {% render_field form.model_type title="Model_type" class="form-control" %}
+        </div>
+
+        <div class="form-group">
+            <label for="car_typeSelect"> Type</label>
+            {% render_field form.car_type title="Car_type" class="form-control" %}
+        </div>
+
+        <div class="form-group">
+            <label for="categorySelect"> Category</label>
+            {% render_field form.category title="Category" class="form-control" %}
+        </div>
+
+        <div class="form-group">
+            <label for="subcategorySelect"> Subcategory</label>
+            {% render_field form.subcategory title="Subcategory" class="form-control" %}
+        </div>
+
+        <div class="form-group">
+            <button id="btnSubmit" class="btn btn-success" type="submit"> Search</button>
+        </div>
+        </form>
+    </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+    <div class="col">
+        <table class="table">
+        <thead>
+            <tr>
+            <th>Code</th>
+            <th>Subcategory</th>
+            <th>Price</th>
+            <th>New Price</th>
+            <th>Images</th>
+            <th>Images</th>
+            <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></td>
+                <td>{{ product.subcategory }}</td>
+                <td> <strike>{{ product.marked_price|floatformat:2 }}</strike></td>
+                <td>{{ product.selling_price|floatformat:2 }}</td>
+                <td><img src= {{ product.image.url }} border=6 height=110 width=110></img></td>
+                <td><img src= {{ product.images1.url }} border=6 height=110 width=110></img></td>
+                <td><img src= {{ product.images2.url }} border=6 height=110 width=110></img></td>
+                <td><a href="{% url 'addtocart' product.id %}" class="btn btn-primary">Add To Cart</a>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+</body>
+
+{% endblock content %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        let make = $('#myForm').data('make')
+        let model_type = $('#myForm').data('model_type')
+        let car_type = $('#myForm').data('car_type')
+        let category = $('#myForm').data('category')
+        let subcategory = $('#myForm').data('subcategory')
+
+        if (make) {
+        $('#id_make option[value='+make+']').attr('selected', 'selected');
+        }
+        if (model_type) {
+        $('#id_model_type option[value='+model_type+']').attr('selected', 'selected');
+        }
+        if (car_type) {
+        $('#id_car_type option[value='+car_type+']').attr('selected', 'selected');
+        }
+        if (category) {
+        $('#id_category option[value='+category+']').attr('selected', 'selected');
+        }
+        if (subcategory) {
+        $('#id_subcategory option[value='+subcategory+']').attr('selected', 'selected');
+        }
+    });
+
+    $('#id_make').on('change', function() {
+        $('#btnSubmit').click();
+    });
+
+    $('#id_model_type').on('change', function() {
+        $('#btnSubmit').click();
+    });
+
+    $('#id_car_type').on('change', function() {
+        $('#btnSubmit').click();
+    });
+
+    $('#id_category').on('change', function() {
+        $('#btnSubmit').click();
+    });
+
+    $('#id_subcategory').on('change', function() {
+        $('#btnSubmit').click();
+    });
+
+</script>
+
+{% endblock js %}

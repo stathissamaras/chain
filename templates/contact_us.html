@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}Contact us{% endblock %}
+{% block content %}
+
+<style>
+    body {
+        background-image: url("/media/static/admin_static/black.png");
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        color: white;
+    }
+    input,
+    textarea {
+        padding: 30px;
+        border: 0;
+        width: 100%;
+        font-size: 1rem;
+        background-color: #2d2d2d;
+        color: white;
+        border-radius: 4px;
+}
+    #submit:hover
+    {
+        color: red;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Contact Form </h1>
+<hr>
+<form action="" method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" style = "background-color: blue" id="submit" value="SEND  MESSAGE"/>
+</form>
+</div>
+</body>
+</html>
+{% endblock content %}

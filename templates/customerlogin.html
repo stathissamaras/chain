@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Customer Login{% endblock %}
+
+{% block content %}
+
+<style>
+    .errorlist {
+        color: red;
+    }
+    body { 
+        background-image: url("/media/static/admin_static/chips.gif");
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        color: white;
+    }
+    label {
+        padding:15px;
+    }
+    .box{
+    width: 400px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #191919;
+    text-align: center;
+    border-radius: 24px;
+    color: white;
+    }
+
+    .box h1{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 400;
+    }
+
+    .box input[type = "text"],.box input[type = "password"]{
+    border:0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    }
+
+    .box input[type = "text"]:focus,.box input[type = "password"]:focus{
+    width: 280px;
+    border-color: #2ecc71;
+    }
+
+    .box input[type = "submit"]{
+    border:0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    }
+
+    .box input[type = "submit"]:hover{
+    background: #2ecc71;
+    }
+</style>
+</head>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+<body>
+<form class="box" action="" method="post">
+    <h1> Login </h1>
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="" value="Login">
+    {% if error %}
+        <li style="color: red;">{{error}}</li>
+    {% endif %}
+    <p><a href="{% url 'passworforgot' %}">Reset now.</a></p>
+    <p><a href="{% url 'customerregistration' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">Register here</a></p>
+</form>
+</body>
+
+{% endblock %}

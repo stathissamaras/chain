@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+
+<style>
+    body { 
+        background-image: url("/media/static/admin_static/whitecar.jpg");
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        height: 100%;
+        background-position: center;
+        color: white;
+    }
+    label {
+        padding:15px;
+    }
+    .jumbotron {
+        background-image: url("/media/static/admin_static/blackhole.jpg");
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        color: white;
+</style>
+</head>
+<body>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+    <h2>Welcome to our Store <a href="filter_dropdown2"> <img border="0" alt="filter_dropdown2" src="/media/static/admin_static/onbutton.png" width="100" height="100"></h2>
+    <p>The Best Quality Parts and Services.</p>
+    </div>
+</div>
+</body>
+
+
+
+{% endblock content %}
+
+{% block js %}
+
+<script src="{% static 'js/data.js' %}"></script>
+<script>(function() {
+	if (!localStorage.getItem('cookieconsent')) {
+		document.body.innerHTML += '\
+		<div class="cookieconsent" style="position:fixed;padding:20px;left:0;bottom:0;background-color:#0000FF color:#FFF;text-align:center;width:100%;z-index:99999;">\
+			This site uses cookies. By continuing to use this website, you agree to their use. \
+			<a href="#" style="color:#CCCCCC;">I Understand</a>\
+		</div>\
+		';
+		document.querySelector('.cookieconsent a').onclick = function(e) {
+			e.preventDefault();
+			document.querySelector('.cookieconsent').style.display = 'none';
+			localStorage.setItem('cookieconsent', true);
+		};
+	}
+})();
+</script>
+{% endblock js %}

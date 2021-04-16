@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+<body>
+
+{% block content %}
+
+<style>
+    body { 
+        background-image: url("/media/static/admin_static/porsche.jpg");
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        height: 100%;
+        background-position: center;
+        color: white;
+    }
+    label {
+        padding:15px;
+    }
+</style>
+</head>
+
+
+<div class="container">
+    <h3>Product added to cart successfully.</h3>
+    <a href="{% url 'filter_dropdown2' %}" class="btn btn-primary">Continue Shooping</a>
+    <a href="{% url 'mycart' %}" class="btn btn-primary">Go to Checkout</a>
+</div>
+</body>
+{% endblock %}

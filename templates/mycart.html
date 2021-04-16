@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %} My cart{% endblock %}
+
+{% block content %}
+
+<style>
+    body { 
+        background-image: url("/media/static/admin_static/tacho.jpg");
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        height: 100%;
+        background-position: center;
+        color: white;
+    }
+    label {
+        padding:15px;
+    }
+</style>
+</head>
+
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Items in my cart</h4><hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Product</th>
+                        <th>Image</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{cp.product.name}}</td>
+                        <td><img src= {{cp.product.image.url}} border=6 height=100 width=100></img></td>
+                        <td>{{cp.quantity}}</td>
+                        <td>{{cp.subtotal|floatformat:2}}</td>
+                        <td>
+                            <a href="{% url 'managecart' cp.id %}?action=inc" class="btn btn-primary"> + </a>
+                            <a href="{% url 'managecart' cp.id %}?action=dcr" class="btn btn-warning"> - </a>
+                            <a href="{% url 'managecart' cp.id %}?action=rmv" class="btn btn-danger"> x </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="4" class="text-right">Total</th>
+                        <th>Euro. {{cart.total|floatformat:2}}</th>
+                        {% if cart.cartproduct_set.all %}
+                        <th><a class="btn btn-primary" href="{% url 'emptycart' %}">Empty Cart</a></th>
+                        {% endif %}
+                    </tr>
+                    {% if cart.cartproduct_set.all %}
+                    <tr>
+                        <th><a class="btn btn-primary" href="{% url 'checkout' %}"> Checkout </a></th>
+                    </tr>
+                    <tr>
+                        <th><a class="btn btn-primary" href="{% url 'filter_dropdown2' %}" class="btn btn-primary">Continue Shooping</a>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}
