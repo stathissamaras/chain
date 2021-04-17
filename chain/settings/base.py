@@ -17,7 +17,11 @@ BASE_DIR = os.path.dirname(
             os.path.dirname(
             os.path.dirname(
             os.path.abspath(__file__))))
-SECRET_KEY = 't*)qs1nubbr%g(^wg&(%ebzsmg=%i0mkh-@k-nd!b&ewg8c%j3'
+
+# SECURITY WARNING: keep the secret key used in production secret!
+with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -103,9 +107,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+# HTTPS settings
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+# HSTS settings
+SECURE_HSTS_SECONDS = 31536000 # 1 year
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-

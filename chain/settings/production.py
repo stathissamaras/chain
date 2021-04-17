@@ -1,7 +1,7 @@
 from .base import *
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1:8000', 'www.jasp.gr']
+ALLOWED_HOSTS = ['jasp', 'www.jasp']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -30,6 +30,7 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
