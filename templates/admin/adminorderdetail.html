@@ -45,7 +45,7 @@ body {
                     {% for cp in ord_obj.cart.cartproduct_set.all %}
                     <tr>
                         <td>{{forloop.counter}}</td>
-                        <td><a target="_blank"
+                        <td><a target="_blank" rel="noreferrer" rel="noopener"
                                 href="{% url 'product_detail' cp.product.id %}">{{cp.product.name}}</a>
                         </td>
                         <td>{{cp.rate}}</td>
