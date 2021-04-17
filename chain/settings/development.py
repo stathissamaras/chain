@@ -1,5 +1,7 @@
 from .base import *
+
 DEBUG = True
+
 ALLOWED_HOSTS = ['127.0.0.1']
 
 DATABASES = {
@@ -8,6 +10,7 @@ DATABASES = {
         'NAME': 'chain',
         'USER': 'postgres',
         'PASSWORD': '1234',
-        'HOST': 'localhost'
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
