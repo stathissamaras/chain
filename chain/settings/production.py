@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['jasp', 'www.jasp', 'chain-gcp.appspot.com']
+ALLOWED_HOSTS = ['jasp', 'www.jasp', 'jasp-311211-gcp.appspot.com']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
