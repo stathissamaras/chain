@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['jasp', 'www.jasp']
+ALLOWED_HOSTS = ['jasp', 'www.jasp.gr', 'localhost', '127.0.0.1']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
